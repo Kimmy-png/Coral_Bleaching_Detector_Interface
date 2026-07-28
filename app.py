@@ -25,7 +25,7 @@ from datetime import datetime, timedelta
 # --------------------------------------------------------------------------------------
 st.set_page_config(
     page_title="Coral-Sync | Marine Intelligence Dashboard",
-    page_icon="🪸",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -214,7 +214,7 @@ RISK_CARD = {"Tinggi": "high", "Sedang": "medium", "Rendah": "low"}
 st.markdown(f"""
 <div class="csync-header">
     <div>
-        <h1>🪸 Coral-Sync <span style="font-weight:400; font-size:16px;">Marine Intelligence Dashboard</span></h1>
+        <h1> Coral-Sync <span style="font-weight:400; font-size:16px;">Marine Intelligence Dashboard</span></h1>
         <p>Prediksi Risiko Coral Bleaching &amp; Rekomendasi Zona Tangkap Ikan &nbsp;•&nbsp; Data as a Service (B2B)</p>
     </div>
     <div class="csync-badge">
@@ -228,7 +228,7 @@ st.markdown(f"""
 # SIDEBAR NAVIGATION
 # --------------------------------------------------------------------------------------
 with st.sidebar:
-    st.markdown("### 🪸 Coral-Sync")
+    st.markdown("###  Coral-Sync")
     st.caption("Marine Intelligence Technology · Stacking Ensemble AI")
     page = st.radio(
         "Navigasi",
@@ -239,12 +239,12 @@ with st.sidebar:
     st.caption("**Model aktif:** RF + XGBoost + LogReg (Stacking)")
     st.caption("**Sumber data (demo):** NOAA CRW, MODIS Chlor-a, ERA5-Land")
     st.markdown("---")
-    st.caption("⚠️ Seluruh data pada dashboard ini adalah *dummy* untuk keperluan demo antarmuka.")
+    st.caption(" Seluruh data pada dashboard ini adalah *dummy* untuk keperluan demo antarmuka.")
 
 # --------------------------------------------------------------------------------------
 # PAGE 1 — PETA & RINGKASAN
 # --------------------------------------------------------------------------------------
-if page == "🗺️ Peta & Ringkasan":
+if page == " Peta & Ringkasan":
 
     k1, k2, k3, k4, k5 = st.columns(5)
     k1.metric("Total Zona Dipantau", f"{len(df)}")
@@ -326,15 +326,15 @@ if page == "🗺️ Peta & Ringkasan":
 # --------------------------------------------------------------------------------------
 # PAGE 2 — REKOMENDASI ZONA TANGKAP
 # --------------------------------------------------------------------------------------
-elif page == "🎣 Rekomendasi Zona Tangkap":
-    st.markdown("### 🎣 Rekomendasi Wilayah Penangkapan Ikan Optimal")
+elif page == " Rekomendasi Zona Tangkap":
+    st.markdown("###  Rekomendasi Wilayah Penangkapan Ikan Optimal")
     st.caption("Ranking dihitung dari kombinasi ketersediaan klorofil-a (proksi kelimpahan ikan) "
                "dan rendahnya risiko stres termal karang di sekitar zona.")
 
     min_score = st.slider("Ambang batas skor kelayakan minimum", 0, 100, 50)
     reco_df = df[df.fishing_score >= min_score].sort_values("fishing_score", ascending=False)
 
-    st.info(f"🧭 Ditemukan **{len(reco_df)} zona** yang direkomendasikan untuk operasi penangkapan "
+    st.info(f" Ditemukan **{len(reco_df)} zona** yang direkomendasikan untuk operasi penangkapan "
             f"berdasarkan kondisi oseanografi terkini.")
 
     for _, row in reco_df.iterrows():
@@ -366,8 +366,8 @@ elif page == "🎣 Rekomendasi Zona Tangkap":
 # --------------------------------------------------------------------------------------
 # PAGE 3 — EARLY WARNING SYSTEM
 # --------------------------------------------------------------------------------------
-elif page == "🚨 Early Warning System":
-    st.markdown("### 🚨 Early Warning System — Stres Termal Karang")
+elif page == " Early Warning System":
+    st.markdown("###  Early Warning System — Stres Termal Karang")
     st.caption("Notifikasi otomatis dikirim ke email/API klien ketika probabilitas bleaching "
                "suatu zona melewati ambang batas alert (BAA ≥ 3, standar NOAA).")
 
@@ -396,7 +396,7 @@ elif page == "🚨 Early Warning System":
             Probabilitas bleaching: <b>{row.risk_proba*100:.1f}%</b> ·
             DHW: {row.dhw} °C-weeks · SST: {row.sst}°C
             </span><br/>
-            <span style="font-size:13px; color:#0E4F66;">💡 {action}</span>
+            <span style="font-size:13px; color:#0E4F66;"> {action}</span>
         </div>
         """, unsafe_allow_html=True)
 
@@ -406,8 +406,8 @@ elif page == "🚨 Early Warning System":
 # --------------------------------------------------------------------------------------
 # PAGE 4 — DETAIL ZONA
 # --------------------------------------------------------------------------------------
-elif page == "🔍 Detail Zona":
-    st.markdown("### 🔍 Detail & Riwayat Zona")
+elif page == " Detail Zona":
+    st.markdown("###  Detail & Riwayat Zona")
     zone_name = st.selectbox("Pilih zona", df.zone_name.tolist())
     row = df[df.zone_name == zone_name].iloc[0]
     ts = generate_timeseries(row.zone_id, row.dhw, row.sst, seed_offset=7)
