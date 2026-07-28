@@ -64,13 +64,29 @@ st.markdown(f"""
     }}
 
     div[data-testid="stMetric"] {{
-        background: white;
+        background: white !important;
         border: 1px solid #E3ECEA;
         border-radius: 12px;
-        padding: 14px 16px 8px 16px;
+        padding: 14px 16px 10px 16px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }}
-    div[data-testid="stMetricLabel"] {{ font-size: 13px; color: #567; }}
+    div[data-testid="stMetric"] * {{
+        color: #16323E !important;
+    }}
+    div[data-testid="stMetricLabel"] {{
+        font-size: 13px !important;
+        color: #4A6B77 !important;
+    }}
+    div[data-testid="stMetricLabel"] p {{
+        overflow: visible !important;
+        white-space: normal !important;
+        text-overflow: unset !important;
+        font-size: 13px !important;
+    }}
+    div[data-testid="stMetricValue"] {{ color: {PRIMARY} !important; }}
+    div[data-testid="stMetricDelta"] {{
+        color: inherit !important;
+    }}
 
     .zone-card {{
         background: white;
@@ -80,7 +96,9 @@ st.markdown(f"""
         padding: 14px 18px;
         margin-bottom: 10px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        color: #16323E !important;
     }}
+    .zone-card, .zone-card * {{ color: #16323E !important; }}
     .zone-card.high {{ border-left-color: {DANGER}; }}
     .zone-card.medium {{ border-left-color: {WARN}; }}
     .zone-card.low {{ border-left-color: {SAFE}; }}
